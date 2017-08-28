@@ -3,7 +3,7 @@
 """
 Collect sample images from an anime-art themed subreddit (like /r/awwnime, SFW)
 Saved as "image_id.ext", where url_hash is the url hash for each of the allowed hosts.
-By default, downloads 100 images. Limit kwarg in collect_images() can be modified.
+By default, downloads 100 images. DL_LIMIT value can be modified.
 """
 
 import os, sys
@@ -23,6 +23,7 @@ resize_dim = (256, 256)
 RESIZE_FOLDER = 'resized_%s_%s' % resize_dim
 
 MIN_SCORE = 100 # the default minimum score before it is downloaded
+DL_LIMIT = 100
 imgur_url_pattern = re.compile(r'(http://i.imgur.com/(.*))(\?.*)?')
 target_subreddit = 'awwnime' # https://www.reddit.com/r/awwnime/
 allowed_hosts = ('i.redd.it', 'cdn.awwni.me', 'i.imgur.com', 'imgur.com') # Only accept images from these hosts
@@ -188,7 +189,7 @@ def collect_anime_pics(limit=1000, daterange=None):
         time = submission.created
         return datetime.datetime.fromtimestamp(time)
 
-    def collect_images(limit=100, daterange=None):
+    def collect_images(limit=DL_LIMIT, daterange=None):
         r = get_client()
         if daterange is None:
             print('Collecting images based on limit of:', limit)

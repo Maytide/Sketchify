@@ -1,0 +1,1 @@
+Download raw images here. Copies be preprocessed into other folders.

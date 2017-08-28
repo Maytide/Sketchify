@@ -1,5 +1,6 @@
 # Main sketchify tool.
 # Base code from: https://github.com/kvfrans/deepcolor/blob/master/main.py
+# See the above github repo for explanation.
 
 import math
 import os
@@ -11,11 +12,10 @@ try:
     from sketchify.sketchify_utils import *
 except ImportError:
     from sketchify_utils import *
-# from collect_anime_pics import resize_dim
 
 random.seed(42)
 
-NUM_ITER = 216 # Was 20k before
+NUM_ITER = 216
 SAVE_INTERVALS = 5
 
 
@@ -80,7 +80,7 @@ class Sketchify():
             else:
                 assert tf.get_variable_scope().reuse is False
 
-            h0 = lrelu(conv2d(image, self.df_dim, name='d_h0_conv')) # h0 is (128 x 128 x self.df_dim)
+            h0 = lrelu(conv2d(image, self.df_dim, name='d_h0_conv')) 			# h0 is (128 x 128 x self.df_dim)
             h1 = lrelu(self.d_bn1(conv2d(h0, self.df_dim*2, name='d_h1_conv'))) # h1 is (64 x 64 x self.df_dim*2)
             h2 = lrelu(self.d_bn2(conv2d(h1, self.df_dim*4, name='d_h2_conv'))) # h2 is (32 x 32 x self.df_dim*4)
             h3 = lrelu(self.d_bn3(conv2d(h2, self.df_dim*8, d_h=1, d_w=1, name='d_h3_conv'))) # h3 is (16 x 16 x self.df_dim*8)
@@ -91,7 +91,7 @@ class Sketchify():
         s = self.output_size
         s2, s4, s8, s16, s32, s64, s128 = int(s/2), int(s/4), int(s/8), int(s/16), int(s/32), int(s/64), int(s/128)
         # image is (256 x 256 x input_c_dim)
-        e1 = conv2d(img_in, self.gf_dim, name='g_e1_conv') # e1 is (128 x 128 x self.gf_dim)
+        e1 = conv2d(img_in, self.gf_dim, name='g_e1_conv') 			# e1 is (128 x 128 x self.gf_dim)
         e2 = bn(conv2d(lrelu(e1), self.gf_dim*2, name='g_e2_conv')) # e2 is (64 x 64 x self.gf_dim*2)
         e3 = bn(conv2d(lrelu(e2), self.gf_dim*4, name='g_e3_conv')) # e3 is (32 x 32 x self.gf_dim*4)
         e4 = bn(conv2d(lrelu(e3), self.gf_dim*8, name='g_e4_conv')) # e4 is (16 x 16 x self.gf_dim*8)
@@ -260,8 +260,7 @@ class Sketchify():
             print("Load failed")
 
     def sample(self, use='validation'):
-        # if use != 'validation':
-        #     use = 'testing'
+        
         saveuse = use
         self.loadmodel(False)
 
@@ -270,7 +269,6 @@ class Sketchify():
         datalen = len(data)
         print(data)
 
-        # for i in range(min(100, datalen // self.batch_size)):
         binary_image_batch = data
         batch = np.array([cv2.resize(imread(batch_file, grayscale=True), (256,256))
                           for batch_file in data])
