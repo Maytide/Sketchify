@@ -1,0 +1,7 @@
+colorize_test/
+*.jpg
+*.png
+*.gif
+TODO.txt
+*samples/
+*/*samples/

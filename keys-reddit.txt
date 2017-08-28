@@ -1,0 +1,2 @@
+client_id: enter here
+client_secret: enter here
