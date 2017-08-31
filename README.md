@@ -16,6 +16,8 @@ Results were so-so; I think they are better than any traditional techniques, but
 
 Implementation branched from [here](https://github.com/kvfrans/deepcolor/blob/master/main.py). Updated to Python 3.5 & tensorflow-gpu 1.2.1 syntax.
 
+Extra information: https://maytide.github.io/sketch/tensorflow/2017/08/28/sketchify.html
+
 <h5>Dependencies:</h5>
 
 Deep Learning/Image processing: Tensorflow, OpenCV (cv2), PIL, numpy, matplotlib <br/>
